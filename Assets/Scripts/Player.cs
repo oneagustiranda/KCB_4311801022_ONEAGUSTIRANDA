@@ -95,8 +95,8 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void lelah()
+    public void Climb()
     {
-
+        //tambahkan fungsi manjat
     }
 }
