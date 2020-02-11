@@ -2,23 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class Player : MonoBehaviour
 {
     public float varHunger;
     public Image HungerImage;
+    public Rigidbody2D myRigidbody2D;
+    public Animator myAnimator;
 
-    public enum playerHungerStats
-    {
-        Starving,
-        Neutral,
-        Full
-    }
-    public playerHungerStats varHungerStats;
+    
     // Start is called before the first frame update
     void Start()
     {
-        
+        myRigidbody2D = GetComponent<Rigidbody2D>();
+        myAnimator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -27,7 +25,17 @@ public class Player : MonoBehaviour
         HungerTime();
         UpdateUI();
         checkStats();
+        Run();
+        FlipSprite();
     }
+
+    public enum playerHungerStats
+    {
+        Starving,
+        Neutral,
+        Full
+    }
+    public playerHungerStats varHungerStats;
 
     public void HungerTime()
     {
@@ -63,6 +71,27 @@ public class Player : MonoBehaviour
             default:
                 print("Aku Kenyang");
                 break;
+        }
+    }
+
+    public void Run()
+    {
+        float controlThrow = CrossPlatformInputManager.GetAxis("Horizontal");
+        Vector2 playerVelocity = new Vector2(controlThrow * runSpeed, myRigidbody2D.velocity.y);
+        myRigidbody2D.velocity = playerVelocity;
+
+        bool playerHasHorizontalSpeed = Mathf.Abs(myRigidbody2D.velocity.x) > Mathf.Epsilon;
+        myAnimator.SetBool("isRunning", playerHasHorizontalSpeed);
+    }
+
+    public float runSpeed = 2f;
+
+    public void FlipSprite()
+    {
+        bool playerHasHorizontalSpeed = Mathf.Abs(myRigidbody2D.velocity.x) > Mathf.Epsilon;
+        if (playerHasHorizontalSpeed)
+        {
+            transform.localScale = new Vector2(Mathf.Sign(myRigidbody2D.velocity.x), 1f);
         }
     }
 }
