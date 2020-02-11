@@ -94,4 +94,9 @@ public class Player : MonoBehaviour
             transform.localScale = new Vector2(Mathf.Sign(myRigidbody2D.velocity.x), 1f);
         }
     }
+
+    public void lelah()
+    {
+
+    }
 }
