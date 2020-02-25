@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Grid2D : MonoBehaviour
 {
+    public bool displayGridGizmos;
     public LayerMask unwalkableMask;
     public Vector2 gridWorldSize;
     public float nodeRadius;
@@ -41,21 +42,37 @@ public class Grid2D : MonoBehaviour
     void OnDrawGizmos()
     {
         Gizmos.DrawWireCube(transform.position, new Vector2(gridWorldSize.x, gridWorldSize.y));
-        if (grid != null)
+
+        if (displayPathGizmos)
         {
-            foreach (Node n in grid)
+            if (path != null )
             {
-                Gizmos.color = Color.red;
-                if (n.walkable)
-                    Gizmos.color = Color.white;
+                foreach (Node n in path)
+                {
+                    Gizmos.color = Color.yellow;
+                    Gizmos.DrawCube(n.worldPosition, Vector3.one * (nodeDiameter - .1f));
+                }
+            }
+        } else
+        {
+            if (grid != null)
+            {
+                foreach (Node n in grid)
+                {
+                    Gizmos.color = Color.red;
+                    if (n.walkable)
+                        Gizmos.color = Color.white;
 
-                if (path != null)
-                    if (path.Contains(n))
-                        Gizmos.color = Color.black;
+                    if (path != null)
+                        if (path.Contains(n))
+                            Gizmos.color = Color.black;
 
-                Gizmos.DrawCube(n.worldPosition, Vector3.one * (nodeDiameter - .1f));
+                    Gizmos.DrawCube(n.worldPosition, Vector3.one * (nodeDiameter - .1f));
+                }
             }
         }
+
+        
     }
 
     public Node NodeFromWorldPoint(Vector2 worldPosition)

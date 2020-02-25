@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Heap<T> where T : IHeapItem<T>
 {
@@ -70,7 +71,7 @@ public class Heap<T> where T : IHeapItem<T>
 
                 if (item.CompareTo(items[swapIndex]) < 0)
                 {
-                    swapIndex(item, items[swapIndex]);
+                    Swap(item, items[swapIndex]);
                 }
                 else
                 {
@@ -109,7 +110,7 @@ public class Heap<T> where T : IHeapItem<T>
         items[itemA.HeapIndex] = itemB;
         items[itemB.HeapIndex] = itemA;
         int itemAIndex = itemA.HeapIndex;
-        itemA.HeapIndex = itemB.Heapindex;
+        itemA.HeapIndex = itemB.HeapIndex;
         itemB.HeapIndex = itemAIndex;
     }
 }
