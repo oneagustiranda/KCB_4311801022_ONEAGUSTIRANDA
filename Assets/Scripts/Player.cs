@@ -78,7 +78,7 @@ public class Player : MonoBehaviour
     }
 
     public void checkStats()
-    {
+    {/*
         switch (varHungerStats)
         {
             case playerHungerStats.Neutral:
@@ -90,7 +90,7 @@ public class Player : MonoBehaviour
             default:
                 print("Aku Kenyang");
                 break;
-        }
+        }*/
     }
 
         public void Run()

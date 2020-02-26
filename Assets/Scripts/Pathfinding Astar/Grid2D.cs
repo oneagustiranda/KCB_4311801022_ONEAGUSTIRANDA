@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Grid2D : MonoBehaviour
 {
-    public bool displayPathGizmos;
+    public bool displayGridGizmos;
     public LayerMask unwalkableMask;
     public Vector2 gridWorldSize;
     public float nodeRadius;
@@ -43,7 +43,7 @@ public class Grid2D : MonoBehaviour
     {
         Gizmos.DrawWireCube(transform.position, new Vector2(gridWorldSize.x, gridWorldSize.y));
 
-        if (displayPathGizmos)
+        if (displayGridGizmos)
         {
             if (path != null )
             {
@@ -107,11 +107,11 @@ public class Grid2D : MonoBehaviour
         return neighbours;
     }
 
-    public int MaxSize
+   /* public int MaxSize
     {
         get
         {
             return gridSizeX * gridSizeY;
         }
-    }
+    }*/
 }
