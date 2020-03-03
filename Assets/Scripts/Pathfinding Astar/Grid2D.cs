@@ -12,7 +12,7 @@ public class Grid2D : MonoBehaviour
     float nodeDiameter;
     int gridSizeX, gridSizeY;
 
-    private void Start()
+    void Awake()
     {
         nodeDiameter = nodeRadius * 2;
         gridSizeX = Mathf.RoundToInt(gridWorldSize.x / nodeDiameter);
@@ -107,11 +107,72 @@ public class Grid2D : MonoBehaviour
         return neighbours;
     }
 
-   /* public int MaxSize
+   public int MaxSize
     {
         get
         {
             return gridSizeX * gridSizeY;
         }
-    }*/
+    }
+
+    public Node ClosestWalkableNode(Node node)
+    {
+        int maxRadius = Mathf.Max(gridSizeX, gridSizeY) / 2;
+        for (int i =1; i < maxRadius; i++)
+        {
+            Node n = FindWalkableInRadius(node.gridX, node.gridY, i);
+            if (n != null)
+            {
+                return n;
+            }
+        }
+        return null;
+    }
+    bool InBounds (int x, int y)
+    {
+        return x >= 0 && x < gridSizeX && y >= 0 && y < gridSizeY;
+    }
+
+    Node FindWalkableInRadius (int centreX, int centreY, int radius)
+    {
+        for (int i = -radius; i<= radius; i++)
+        {
+            int verticalSearchX = i + centreX;
+            int horizontalSearchY = i + centreY;
+
+            //top
+            if (InBounds(verticalSearchX, centreY + radius))
+            {
+                if (grid[verticalSearchX, centreY + radius].walkable)
+                {
+                    return grid[verticalSearchX, centreY + radius];
+                }
+            }
+            //bottom
+            if (InBounds(verticalSearchX, centreY - radius))
+            {
+                if (grid[verticalSearchX, centreY - radius].walkable)
+                {
+                    return grid[verticalSearchX, centreY - radius];
+                }
+            }
+            //right
+            if (InBounds(centreY + radius, horizontalSearchY))
+            {
+                if (grid[centreX + radius, horizontalSearchY].walkable)
+                {
+                    return grid[centreX + radius, horizontalSearchY];
+                }
+            }
+            //left
+            if (InBounds(centreY - radius, horizontalSearchY))
+            {
+                if (grid[centreX - radius, horizontalSearchY].walkable)
+                {
+                    return grid[centreX - radius, horizontalSearchY];
+                }
+            }
+        }
+        return null;
+    }
 }
