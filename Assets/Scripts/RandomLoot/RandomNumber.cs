@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class RandomNumber : MonoBehaviour
 {
+    public int spawnSomething;
+    public GameObject spawnObject;
+    public bool isSpawn = false;
+
     // Start is called before the first frame update
     void Start()
     {
-        randomNum();
+        //randomNum();
     }
 
     // Update is called once per frame
@@ -24,5 +28,18 @@ public class RandomNumber : MonoBehaviour
             print(x);
         }
         
+    }
+
+    public void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.tag == "Player")
+        {
+            spawnSomething = Random.Range(0, 2);
+            if(spawnSomething == 1 && !isSpawn)
+            {
+                Instantiate(spawnObject, transform.position, Quaternion.identity);
+                isSpawn = true;
+            }
+        }
     }
 }

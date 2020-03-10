@@ -49,6 +49,9 @@ TagManager:
   - name: Foreground
     uniqueID: 2900830843
     locked: 0
+  - name: Props
+    uniqueID: 3460098111
+    locked: 0
   - name: Food
     uniqueID: 4094555317
     locked: 0
