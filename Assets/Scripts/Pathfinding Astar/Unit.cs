@@ -26,7 +26,6 @@ public class Unit : MonoBehaviour
                 targetPositionold = (Vector2)target.position;
 
                 path = Pathfinding.RequestPath(transform.position, target.position);
-                print("Target x =" + target.position.x + "y=" + target.position.y);
 
                 StopCoroutine("FollowPath");
                 StartCoroutine("FollowPath");
