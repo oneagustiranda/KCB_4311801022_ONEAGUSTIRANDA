@@ -55,6 +55,9 @@ TagManager:
   - name: Food
     uniqueID: 4094555317
     locked: 0
+  - name: Farm
+    uniqueID: 740252515
+    locked: 0
   - name: Player
     uniqueID: 1873994595
     locked: 0

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     public float jumpSpeed = 10f;
     public float varHunger;
     public Image HungerImage;
+    public static string playerTool;
     public Rigidbody2D myRigidbody2D;
     public Animator myAnimator;
     public Collider2D myCollider2D;
