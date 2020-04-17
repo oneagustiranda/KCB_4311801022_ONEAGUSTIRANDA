@@ -194,7 +194,7 @@ public class SugenoFuzzy : MonoBehaviour
         disjungsi_kesehatan_tanaman_tinggi = hitung_kesehatan_tanaman_tinggi (rule [5], rule [7], rule [8]);
     }
 
-    pubic float defuzifikasi(){
+    public float defuzifikasi(){
         float titikBerat;
         titikBerat = ((ref_tinggi * disjungsi_kesehatan_tanaman_tinggi) + (ref_sedang * disjungsi_kesehatan_tanaman_sedang) + (ref_rendah * disjungsi_kesehatan_tanaman_rendah));
         return titikBerat;
