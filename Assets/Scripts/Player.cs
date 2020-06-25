@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     public Rigidbody2D myRigidbody2D;
     public Animator myAnimator;
     public Collider2D myCollider2D;
+    public GameObject panelGameOver;
     
     // Start is called before the first frame update
     void Start()
@@ -53,7 +54,6 @@ public class Player : MonoBehaviour
 
     public enum playerHungerStats
     {
-        Dead,
         Starving,
         Neutral,
         Full
@@ -64,10 +64,10 @@ public class Player : MonoBehaviour
     {
         varHunger -= 1 * Time.deltaTime;
 
-        if (varHunger == 0)
+        if (varHunger <= 0)
         {
-            gameOver = GetComponent<Text>();
-            varHungerStats = playerHungerStats.Dead;
+            Destroy(gameObject);
+            panelGameOver.SetActive (true);   
         }
         else if (varHunger <= 30)
         {
@@ -95,9 +95,6 @@ public class Player : MonoBehaviour
                 break;
             case playerHungerStats.Starving:
                 print("Aku Lapar");
-                break;
-            case playerHungerStats.Dead:
-                print("Aku Mati Ajaa!");
                 break;
             default:
                 print("Aku Kenyang");
