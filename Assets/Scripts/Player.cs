@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     public float jumpSpeed = 10f;
     public float varHunger;
     public Image HungerImage;
+    public Text gameOver;
     public static string playerTool;
     public Rigidbody2D myRigidbody2D;
     public Animator myAnimator;
@@ -34,6 +35,7 @@ public class Player : MonoBehaviour
         Jump();
     }
 
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Food")
@@ -51,6 +53,7 @@ public class Player : MonoBehaviour
 
     public enum playerHungerStats
     {
+        Dead,
         Starving,
         Neutral,
         Full
@@ -61,7 +64,12 @@ public class Player : MonoBehaviour
     {
         varHunger -= 1 * Time.deltaTime;
 
-        if (varHunger <= 30)
+        if (varHunger == 0)
+        {
+            gameOver = GetComponent<Text>();
+            varHungerStats = playerHungerStats.Dead;
+        }
+        else if (varHunger <= 30)
         {
             varHungerStats = playerHungerStats.Starving;
         } else if (varHunger <= 60)
@@ -79,7 +87,7 @@ public class Player : MonoBehaviour
     }
 
     public void checkStats()
-    {/*
+    {
         switch (varHungerStats)
         {
             case playerHungerStats.Neutral:
@@ -88,10 +96,13 @@ public class Player : MonoBehaviour
             case playerHungerStats.Starving:
                 print("Aku Lapar");
                 break;
+            case playerHungerStats.Dead:
+                print("Aku Mati Ajaa!");
+                break;
             default:
                 print("Aku Kenyang");
                 break;
-        }*/
+        }
     }
 
         public void Run()

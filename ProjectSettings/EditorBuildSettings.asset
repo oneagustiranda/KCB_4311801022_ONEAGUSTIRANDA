@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scene/Minggu1_4311801022.unity
+    guid: 062197c6fb3f6481a89c9eaadfe8f2cc
   m_configObjects: {}
